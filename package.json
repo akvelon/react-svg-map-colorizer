@@ -1,0 +1,16 @@
+{
+  "name": "react-svg-map-colorizer",
+  "version": "1.0.0",
+  "description": "Allows color polygons of existing SVG image with React.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "svg",
+    "heatmap"
+  ],
+  "author": "Alex Kharchenko",
+  "license": "MIT"
+}
