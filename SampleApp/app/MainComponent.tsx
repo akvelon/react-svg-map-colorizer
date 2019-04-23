@@ -1,29 +1,31 @@
 import { Svg } from "../../dist/index"; // content of react-svg-map-colorizer npm package.
 import * as React from "react";
-import { SectionSelector } from "./SectionSelector";
 
 export function MainComponent() {
 	const [svgUrl, setSvgUrl] = React.useState<string>(null);
 	const [selectedIds, updateSelection] = useSelectedIds();
 	return (
-		<div style={{display: "flex", alignItems: "flex-start", justifyContent: "space-around", width: "50vw", marginLeft: "25vw"}}>
+		<div>
 			{
 				svgUrl
-				? <>
-						<Svg svgUrl={svgUrl} selectedIds={selectedIds.map(i => i.toString())} selectedColor={"red"} defaultColor = "white"/>
-						<SectionSelector selectedIds={selectedIds} count={6} updateSelection={updateSelection}/>
-					</>
+				? <Svg
+						svgUrl={svgUrl}
+						selectedIds={selectedIds}
+						selectedColor="red"
+						defaultColor ="white"
+						onPolygonClick={updateSelection}
+					/>
 				: <input type="file" onChange={e => setSvgUrl(URL.createObjectURL(e.target.files[0]))} />
 			}
 		</div>
 	);
 }
 
-function useSelectedIds(): [number[], (id: number) => void]
+function useSelectedIds(): [string[], (id: string) => void]
 {
-	const [selectedIds, setSelectedIds] = React.useState<number[]>([]);
+	const [selectedIds, setSelectedIds] = React.useState<string[]>([]);
 
-	function updateSelection(id: number)
+	function updateSelection(id: string)
 	{
 		const newIds = [];
 		let hitId = false;
@@ -38,7 +40,7 @@ function useSelectedIds(): [number[], (id: number) => void]
 			}
 		});
 
-		if (!hitId) // if not hit then need to select
+		if (!hitId) // if it wasn't removed from the list of selected elements then indeed need to select
 		{
 			newIds.push(id);
 		}

@@ -10,4 +10,6 @@ The sample app demonstrates how we can create app which uses the component.
    3. Execute `npx webpack --config webpack.config.js`
 
 # Run the app
-Once built, go to SampleApp root and double click on `index.html` so that open it in the browser.
+1. Once built, go to SampleApp root and double click on `index.html` so that open it in the browser.
+2. Then select `SvgSample.svg` at the SampleApp root. 
+3. You now can click on polygons so that toggle color.
