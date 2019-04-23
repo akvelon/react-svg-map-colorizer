@@ -22,6 +22,10 @@ interface PolygonsRendererProps
      * Map of selected ids. The one with 'true' value would be highlighted with fillSelected color.
      */
     selectedIds: { [id: string]: boolean };
+    /**
+     * Allows to specify on click handler for polygon.
+     */
+    onPolygonClick?: (id: string) => any;
 }
 
 /**
@@ -30,19 +34,30 @@ interface PolygonsRendererProps
 class PolygonsRenderer extends React.Component<PolygonsRendererProps, {}>
 {
     /**
-     * Used as perf tweak, we expect only color changes so reuse React elements whenewer possible.
+     * Used as perf tweak, we expect only color changes on onPolygonClick so reuse React elements whenewer possible.
      * This way both reducing memory footprint and GC overhead and help with reconciliation.
      */
     private polygonsCollection: React.ReactSVGElement[];
+    private prevOnPolygonClick: (id: string) => any;
 
     render = () => <>{this.getPolygons()}</>
 
     /**
      * The function which supplies us with elements we want to return in render.
      */
-    private getPolygons = () => this.polygonsCollection
-        ? this.getUpdatedPolygons()
-        : this.fillPolygonsInitially(); // First render.
+    private getPolygons()
+    {
+        const bothNotDefined = (!!this.prevOnPolygonClick) === (!!this.props.onPolygonClick); // A
+        const areFunctionsTheSame = this.prevOnPolygonClick === this.props.onPolygonClick; // B
+        const collectionEmpty = !this.polygonsCollection; // C
+        const needFillPolygonsFromScratch = collectionEmpty || !(bothNotDefined || areFunctionsTheSame); // Truth table simplification to y= C + (A + B)`
+
+        this.prevOnPolygonClick = this.props.onPolygonClick;
+
+        return needFillPolygonsFromScratch
+        ? this.fillPolygons()
+        : this.getUpdatedPolygons();
+    }
 
     /**
      * Tweaks collection of elements rendered into DOM based on expected color value.
@@ -66,9 +81,9 @@ class PolygonsRenderer extends React.Component<PolygonsRendererProps, {}>
     }
 
     /**
-     * Nothing to tweak, so we just fill polygons collection for first render.
+     * Fill the whole collection without reuse.
      */
-    private fillPolygonsInitially()
+    private fillPolygons()
     {
         return this.polygonsCollection = this.props.polygons.map(def =>
             this.createPolygonMetadata(def.id, def.points, this.getFillValueForPolygon(def.id))
@@ -88,7 +103,8 @@ class PolygonsRenderer extends React.Component<PolygonsRendererProps, {}>
             key: id,
             points,
             stroke: "black",
-            fill
+            fill,
+            onClick: this.props.onPolygonClick ? () => this.props.onPolygonClick(id): undefined
         });
     }
 

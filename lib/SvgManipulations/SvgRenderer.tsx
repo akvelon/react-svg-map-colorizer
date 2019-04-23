@@ -24,6 +24,11 @@ interface SvgRendererProps
      * Color for elements which are not listed in selectedIds.
      */
     defaultColor: string;
+    /**
+     * Allows to specify on click handler for polygon.
+     * For performance reason it better keep the ref if behaves the same.
+     */
+    onPolygonClick?: (id: string) => any;
 }
 
 /**
@@ -64,6 +69,7 @@ class SvgRenderer extends React.Component<SvgRendererProps, {}>
             fillSelected={this.props.selectedColor}
             fillNonSelected={this.props.defaultColor}
             selectedIds={selectedIds}
+            onPolygonClick={this.props.onPolygonClick}
         />, this.polygonsGroup);
     }
 
@@ -82,6 +88,7 @@ class SvgRenderer extends React.Component<SvgRendererProps, {}>
                     fillSelected={this.props.selectedColor}
                     fillNonSelected={this.props.defaultColor}
                     selectedIds={{}}
+                    onPolygonClick={this.props.onPolygonClick}
                 />, this.polygonsGroup);
 
                 this.forceUpdate(); // Triggerring update so that populate exact colors to svg based on our props.
