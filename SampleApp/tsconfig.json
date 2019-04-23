@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "es6",
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "declaration": true,
+    "outDir": "./dist/",
+    "jsx": "react",
+    "lib":[
+      "es2017",
+      "dom"
+    ]
+  },
+  "files": [
+    "./app/app.ts"
+  ]
+}
