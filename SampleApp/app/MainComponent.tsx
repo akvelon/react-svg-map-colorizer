@@ -13,7 +13,7 @@ export function MainComponent() {
 						selectedIds={selectedIds}
 						selectedColor="red"
 						defaultColor ="white"
-						onPolygonClick={updateSelection}
+						onPrimitiveClick={updateSelection}
 					/>
 				: <input type="file" onChange={e => setSvgUrl(URL.createObjectURL(e.target.files[0]))} />
 			}

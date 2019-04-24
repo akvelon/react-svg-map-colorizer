@@ -1,7 +1,7 @@
 {
   "name": "react-svg-map-colorizer",
-  "version": "0.1.0",
-  "description": "Allows color polygons of existing SVG image with React.",
+  "version": "0.1.1",
+  "description": "Allows color primitives of existing SVG image with React.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "keywords": [
