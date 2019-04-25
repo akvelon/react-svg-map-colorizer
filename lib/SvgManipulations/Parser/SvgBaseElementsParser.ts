@@ -1,11 +1,13 @@
 import { Parser, SvgPrimitiveDesription } from "./ParserInterfaces";
 import { parsePolygon } from "./PrimitiveParsers/polygonParser";
+import { parseRect } from "./PrimitiveParsers/rectParser";
 
 /**
  * Here we list all of supported parsers.
  */
 const primitiveParsers: Parser[] = [
 	parsePolygon,
+	parseRect,
 ];
 
 /**
