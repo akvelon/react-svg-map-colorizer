@@ -15,10 +15,6 @@ interface SvgPrimitiveRendererProps
      */
     fillSelected: string;
     /**
-     * Color to fill the elements with ID which are not listed in selectedIds collection.
-     */
-    fillNonSelected: string;
-    /**
      * Map of selected ids. The one with 'true' value would be highlighted with fillSelected color.
      */
     selectedIds: { [id: string]: boolean };
@@ -73,7 +69,7 @@ class SvgPrimitiveRenderer extends React.Component<SvgPrimitiveRendererProps, {}
             const primitive = this.primitivesCollection[i];
             const primitiveDescription = this.props.primitives[i];
             const meta = primitiveDescription.getMetadata(primitive);
-            const newColor = this.getColorForPrimitive(meta.id);
+            const newColor = this.getColorForPrimitive(meta.id, i);
             if (newColor !== meta.color)
             {
                 this.primitivesCollection[i] = primitiveDescription.createElement(newColor, this.props.onPrimitiveClick);
@@ -89,16 +85,16 @@ class SvgPrimitiveRenderer extends React.Component<SvgPrimitiveRendererProps, {}
     private fillPrimitives()
     {
         return this.primitivesCollection = this.props.primitives
-            .map(p => p.createElement(this.getColorForPrimitive(p.id), this.props.onPrimitiveClick));
+            .map((p, i) => p.createElement(this.getColorForPrimitive(p.id, i), this.props.onPrimitiveClick));
     }
 
     /**
      * Gets the color value for primitive with specified id.
      */
-    private getColorForPrimitive = (id: string) =>
+    private getColorForPrimitive = (id: string, ind: number) =>
         this.props.selectedIds[id]
             ? this.props.fillSelected
-            : this.props.fillNonSelected;
+            : this.props.primitives[ind].initialColor;
 }
 
 export

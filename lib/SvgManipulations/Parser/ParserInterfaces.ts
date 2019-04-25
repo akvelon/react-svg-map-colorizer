@@ -11,6 +11,10 @@ interface SvgPrimitiveDesription
 	 */
 	readonly id: string;
 	/**
+	 * The color of rendered element.
+	 */
+	readonly initialColor: string;
+	/**
 	 * Creates new VDOM element based on props.
 	 */
 	createElement: (color: string, onClickHandler: (id: string) => any) => React.ReactSVGElement;

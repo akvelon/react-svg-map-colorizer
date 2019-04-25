@@ -14,6 +14,8 @@ export function basePrimitiveParser(
 	const fixedAttrs: React.SVGAttributes<SVGAElement> = {};
 
 	Object.keys(fixedAttrsMap).forEach(k => fixedAttrs[k] = domElement.getAttribute(fixedAttrsMap[k]));
+	const id = domElement.getAttribute("id");
+	const initialColor = domElement.getAttribute(color);
 
-	return new PrimitiveDescription(domElement.getAttribute("id"), element, color, fixedAttrs);
+	return new PrimitiveDescription(id, element, color, initialColor, fixedAttrs);
 }

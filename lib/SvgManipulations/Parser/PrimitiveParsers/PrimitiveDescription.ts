@@ -13,6 +13,7 @@ export type SvgColor = "fill"|"stroke";
 export class PrimitiveDescription implements SvgPrimitiveDesription
 {
 	readonly id: string;
+	readonly initialColor: string;
 	private readonly element: keyof React.ReactSVG;
 	private readonly colorProp: SvgColor;
 	private readonly fixedAttrs: React.SVGAttributes<SVGElement>;
@@ -20,6 +21,7 @@ export class PrimitiveDescription implements SvgPrimitiveDesription
 	constructor(id: string,
 		element: keyof React.ReactSVG,
 		colorProp: SvgColor,
+		initialColor: string,
 		fixedAttrs: React.SVGAttributes<SVGElement>
 	)
 	{
@@ -27,6 +29,7 @@ export class PrimitiveDescription implements SvgPrimitiveDesription
 		this.element = element;
 		this.colorProp = colorProp;
 		this.fixedAttrs = fixedAttrs;
+		this.initialColor = initialColor;
 	}
 
 	createElement(color: string, onClickHandler: (id: string) => any): React.ReactSVGElement

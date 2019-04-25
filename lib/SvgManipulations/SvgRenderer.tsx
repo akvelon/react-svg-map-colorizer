@@ -22,10 +22,6 @@ interface SvgRendererProps
      */
     selectedColor: string;
     /**
-     * Color for elements which are not listed in selectedIds.
-     */
-    defaultColor: string;
-    /**
      * Allows to specify on click handler for primitive.
      * For performance reason it better keep the ref if behaves the same.
      */
@@ -68,7 +64,6 @@ class SvgRenderer extends React.Component<SvgRendererProps, {}>
         ReactDom.render(<SvgPrimitiveRenderer
             primitives={this.primitives}
             fillSelected={this.props.selectedColor}
-            fillNonSelected={this.props.defaultColor}
             selectedIds={selectedIds}
             onPrimitiveClick={this.props.onPrimitiveClick}
         />, this.primitivesGroup);
@@ -87,7 +82,6 @@ class SvgRenderer extends React.Component<SvgRendererProps, {}>
                 ReactDom.hydrate(<SvgPrimitiveRenderer
                     primitives={this.primitives}
                     fillSelected={this.props.selectedColor}
-                    fillNonSelected={this.props.defaultColor}
                     selectedIds={{}}
                     onPrimitiveClick={this.props.onPrimitiveClick}
                 />, this.primitivesGroup);

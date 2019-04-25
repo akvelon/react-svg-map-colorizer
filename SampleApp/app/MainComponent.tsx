@@ -12,7 +12,6 @@ export function MainComponent() {
 						svgUrl={svgUrl}
 						selectedIds={selectedIds}
 						selectedColor="red"
-						defaultColor ="white"
 						onPrimitiveClick={updateSelection}
 					/>
 				: <input type="file" onChange={e => setSvgUrl(URL.createObjectURL(e.target.files[0]))} />
