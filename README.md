@@ -15,6 +15,14 @@ The `react-svg-map-colorizer` not just hide DOM manipulations on SVG element wit
 2. Implementation requires the place for `mounting` the React tree. So SVG image format is restricted to one, where all primitives which need updates should be included into `<g id="data">` svg group. It also expected that aforementioned group will contain only supported primitives.
    1. Here is the list of supported primitives
       1. polygon
+	  2. rect
+	  3. circle
+	  4. ellipse
+	  5. line
+	  6. polyline
+	  7. path
+
+3. For lines colorization happen for `stroke` property and for shapes for `fill` property, path is special case as can be both, so whether alter `stroke` or `fill` decided based on initial value for `fill` (if visible than it would `fill`).
 
 # How to use the component?
 ### Within React app
