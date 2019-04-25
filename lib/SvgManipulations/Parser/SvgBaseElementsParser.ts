@@ -4,6 +4,7 @@ import { parseRect } from "./PrimitiveParsers/rectParser";
 import { parseCircle } from "./PrimitiveParsers/circleParser";
 import { parseEllipse } from "./PrimitiveParsers/ellipseParser";
 import { parseLine } from "./PrimitiveParsers/lineParser";
+import { parsePolyline } from "./PrimitiveParsers/polylineParser";
 
 /**
  * Here we list all of supported parsers.
@@ -14,6 +15,7 @@ const primitiveParsers: Parser[] = [
 	parseCircle,
 	parseEllipse,
 	parseLine,
+	parsePolyline,
 ];
 
 /**
