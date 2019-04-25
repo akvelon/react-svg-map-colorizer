@@ -1,6 +1,6 @@
 {
   "name": "react-svg-map-colorizer",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Allows color primitives of existing SVG image with React.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
