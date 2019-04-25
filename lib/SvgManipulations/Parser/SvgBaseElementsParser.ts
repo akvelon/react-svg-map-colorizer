@@ -5,6 +5,7 @@ import { parseCircle } from "./PrimitiveParsers/circleParser";
 import { parseEllipse } from "./PrimitiveParsers/ellipseParser";
 import { parseLine } from "./PrimitiveParsers/lineParser";
 import { parsePolyline } from "./PrimitiveParsers/polylineParser";
+import { parsePath } from "./PrimitiveParsers/pathParser";
 
 /**
  * Here we list all of supported parsers.
@@ -16,6 +17,7 @@ const primitiveParsers: Parser[] = [
 	parseEllipse,
 	parseLine,
 	parsePolyline,
+	parsePath,
 ];
 
 /**
