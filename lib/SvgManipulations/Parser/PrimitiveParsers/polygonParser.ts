@@ -13,7 +13,6 @@ function parsePolygon(domElement: SVGElement): SvgPrimitiveDesription
 	}
 
 	return basePrimitiveParser(domElement, "polygon", "fill", {
-		id: "id",
 		stroke: "stroke",
 		strokeWidth: "stroke-width",
 		points: "points"
