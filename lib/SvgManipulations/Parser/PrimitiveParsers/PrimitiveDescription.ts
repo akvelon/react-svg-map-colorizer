@@ -37,6 +37,7 @@ export class PrimitiveDescription implements SvgPrimitiveDesription
 		return React.createElement(this.element, {
 			...this.fixedAttrs,
 			id: this.id,
+			key: this.id,
 			onClick: onClickHandler ? () => onClickHandler(this.id) : undefined,
 			[this.colorProp]: color,
 		});
