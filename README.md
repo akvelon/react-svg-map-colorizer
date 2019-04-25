@@ -35,8 +35,8 @@ function MyComponentNeedSvg {
 	const svgProps = {
 		svgUrl: "svgUrl",
 		selectedColor : "red",
-		defaultColor : "white",
-		selectedIds : ["elementId1", "elementId2"]
+		selectedIds : ["elementId1", "elementId2"],
+		onPrimitiveClick: (id) => console.log(id),
 	};
 
 	return  <Svg {...svgProps} />;
@@ -56,9 +56,9 @@ const svgContainer = document.getElementById("containerId");
 function RenderColoredSvg {
 	const svgProps = {
 		svgUrl: "svgUrl",
-		selectedColor : "red"
-		defaultColor : "white"
-		selectedIds : ["elementId1", "elementId2"]
+		selectedColor : "red",
+		selectedIds : ["elementId1", "elementId2"],
+		onPrimitiveClick: (id) => console.log(id),
 	};
 
 
