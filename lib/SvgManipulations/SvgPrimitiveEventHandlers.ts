@@ -6,19 +6,19 @@ export interface SvgPrimitiveEventHandlers
     /**
      * Allows to specify on click handler for primitive.
      */
-	onPrimitiveClick: (id: string, event: React.MouseEventHandler<SVGElement>) => any;
+	onPrimitiveClick: (id: string, event: React.MouseEvent<SVGElement>) => any;
     /**
      * Allows to specitfy the onMouseEnter handler for primitive.
      */
-	onPrimitiveEnter: (id: string, event: React.MouseEventHandler<SVGElement>) => any;
+	onPrimitiveEnter: (id: string, event: React.MouseEvent<SVGElement>) => any;
     /**
      * Allows to specitfy the onMouseLeave handler for primitive.
      */
-	onPrimitiveLeave: (id: string, event: React.MouseEventHandler<SVGElement>) => any;
+	onPrimitiveLeave: (id: string, event: React.MouseEvent<SVGElement>) => any;
     /**
      * Allows to specitfy the onMouseMove handler for primitive.
      */
-	onPrimitiveMove: (id: string, event: React.MouseEventHandler<SVGElement>) => any;
+	onPrimitiveMove: (id: string, event: React.MouseEvent<SVGElement>) => any;
 }
 
 /**
