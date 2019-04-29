@@ -79,4 +79,7 @@ function unmountSvgComponent () {
 |`svgUrl`  | The url to svg image. If you have file, you can create one with ` URL.createObjectUrl(file);`, please note to keep the url same for the same image, otherwise new component would created inside which would cause performance degradation for render.|
 |`selectedColor`| The fill color for elements with ids listed in `selectedIds`|
 |`selectedIds`| Array of element ids to be filled with `selectedColor`, elements which are not listed here would be filled with initial color.|
-|`onPrimitiveClick`| The optional callback you may pass to svg. It would be called with primitive id when primitive clicked. For performance reason it better have the same reference to calback otherwise it cause VDOM update.
+|`onPrimitiveClick`| The optional callback you may pass to svg. It would be called with primitive id when primitive clicked and related mouse event.|
+|`onPrimitiveEnter`| The optional callback which would be called with primitive id and mouse event when mouse enter into primitive.|
+|`onPrimitiveLeave`| The optional callback which would be called with primitive id and mouse event when mouse leaves primitive.|
+|`onPrimitiveMove`| The optional callback which would be called with primitive id and mouse event when mouse moves in primitive.|

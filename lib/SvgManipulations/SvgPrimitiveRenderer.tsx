@@ -1,10 +1,11 @@
 import * as React from "react";
 import { SvgPrimitiveDesription } from "./Parser/ParserInterfaces";
+import { SvgPrimitiveEventHandlers } from "./SvgPrimitiveEventHandlers"
 
 /**
  * Describes props for svg primitives renderer.
  */
-interface SvgPrimitiveRendererProps
+interface SvgPrimitiveRendererProps extends SvgPrimitiveEventHandlers
 {
     /**
      * Metadata describing primitives to render, doesn't expected to change.
@@ -18,83 +19,35 @@ interface SvgPrimitiveRendererProps
      * Map of selected ids. The one with 'true' value would be highlighted with fillSelected color.
      */
     selectedIds: { [id: string]: boolean };
-    /**
-     * Allows to specify on click handler for primitive element.
-     */
-    onPrimitiveClick?: (id: string) => any;
 }
 
 /**
  * Helper component needed to update the base elements rendered inside the <g> element.
  */
-class SvgPrimitiveRenderer extends React.Component<SvgPrimitiveRendererProps, {}>
+function SvgPrimitiveRenderer(props: SvgPrimitiveRendererProps)
 {
-    /**
-     * Used as perf tweak, we expect only color changes and onPrimitiveClick so reuse React elements whenewer possible.
-     * This way both reducing memory footprint and GC overhead and help with reconciliation.
-     */
-    private primitivesCollection: React.ReactSVGElement[];
-    private prevOnPrimitiveClick: (id: string) => any;
-
-    render = () => <>{this.getPrimitives()}</>
-
-    /**
-     * The function which supplies us with elements we want to return in render.
-     */
-    private getPrimitives()
-    {
-        const prevUndefined = !this.prevOnPrimitiveClick;
-        const currentUndefined = !this.props.onPrimitiveClick;
-        const bothNotDefined = prevUndefined && currentUndefined; // A
-        const areFunctionsTheSame = this.prevOnPrimitiveClick === this.props.onPrimitiveClick; // B
-        const collectionEmpty = !this.primitivesCollection; // C
-        const needFillPrimitivesFromScratch = collectionEmpty || !(bothNotDefined || areFunctionsTheSame); // Truth table simplification to y= C + (A + B)`
-
-        this.prevOnPrimitiveClick = this.props.onPrimitiveClick;
-
-        return needFillPrimitivesFromScratch
-        ? this.fillPrimitives()
-        : this.getUpdatedPrimitives();
-    }
-
-    /**
-     * Tweaks collection of elements rendered into DOM based on expected color value.
-     */
-    private getUpdatedPrimitives()
-    {
-        // we assume that primitives order, count and position never change, if it is(in case another SVG loaded)
-        // then this should be handled on level above by creating new renderer.
-        for (let i = 0; i < this.primitivesCollection.length; i++)
-        {
-            const primitive = this.primitivesCollection[i];
-            const primitiveDescription = this.props.primitives[i];
-            const meta = primitiveDescription.getMetadata(primitive);
-            const newColor = this.getColorForPrimitive(meta.id, i);
-            if (newColor !== meta.color)
-            {
-                this.primitivesCollection[i] = primitiveDescription.createElement(newColor, this.props.onPrimitiveClick);
+    return (
+        <>
+            {props.primitives.map((p, i) =>
+                p.createElement(getColorForPrimitive(p.id, i), { // explicitly map over so that don't fill with excess props.
+                    onPrimitiveClick: props.onPrimitiveClick,
+                    onPrimitiveEnter: props.onPrimitiveEnter,
+                    onPrimitiveLeave: props.onPrimitiveLeave,
+                    onPrimitiveMove: props.onPrimitiveMove
+                }))
             }
-        }
-
-        return this.primitivesCollection;
-    }
-
-    /**
-     * Fill the whole collection without reuse.
-     */
-    private fillPrimitives()
-    {
-        return this.primitivesCollection = this.props.primitives
-            .map((p, i) => p.createElement(this.getColorForPrimitive(p.id, i), this.props.onPrimitiveClick));
-    }
+        </>
+    );
 
     /**
      * Gets the color value for primitive with specified id.
      */
-    private getColorForPrimitive = (id: string, ind: number) =>
-        this.props.selectedIds[id]
-            ? this.props.fillSelected
-            : this.props.primitives[ind].initialColor;
+    function getColorForPrimitive(id: string, ind: number)
+    {
+        return props.selectedIds[id]
+            ? props.fillSelected
+            : props.primitives[ind].initialColor;
+    }
 }
 
 export

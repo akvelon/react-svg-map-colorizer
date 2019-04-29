@@ -3,11 +3,12 @@ import * as ReactDom from "react-dom";
 import { SvgPrimitiveRenderer } from "./SvgPrimitiveRenderer";
 import { SvgPrimitiveDesription } from "./Parser/ParserInterfaces";
 import { parseSvgGroup } from "./Parser/SvgBaseElementsParser";
+import { SvgPrimitiveEventHandlersPartial } from "./SvgPrimitiveEventHandlers";
 
 /**
  * Describes the SvgRenderer props.
  */
-interface SvgRendererProps
+interface SvgRendererProps extends SvgPrimitiveEventHandlersPartial
 {
     /**
      * Url for svg to be loaded into DOM and managed with React.
@@ -21,11 +22,6 @@ interface SvgRendererProps
      * Color for elements listed in selectedIds.
      */
     selectedColor: string;
-    /**
-     * Allows to specify on click handler for primitive.
-     * For performance reason it better keep the ref if behaves the same.
-     */
-    onPrimitiveClick?: (id: string) => any;
 }
 
 /**
@@ -61,12 +57,7 @@ class SvgRenderer extends React.Component<SvgRendererProps, {}>
         {
             this.props.selectedIds.forEach(id => selectedIds[id] = true);
         }
-        ReactDom.render(<SvgPrimitiveRenderer
-            primitives={this.primitives}
-            fillSelected={this.props.selectedColor}
-            selectedIds={selectedIds}
-            onPrimitiveClick={this.props.onPrimitiveClick}
-        />, this.primitivesGroup);
+        ReactDom.render(this.getSvgPrimitiveRenderer(selectedIds), this.primitivesGroup);
     }
 
     componentDidMount()
@@ -79,16 +70,24 @@ class SvgRenderer extends React.Component<SvgRendererProps, {}>
                 this.fillSvgMetadata();
                 // at this point we have SVG in DOM and attaching React to svg primitives part so that
                 // update it further with nice React syntax.
-                ReactDom.hydrate(<SvgPrimitiveRenderer
-                    primitives={this.primitives}
-                    fillSelected={this.props.selectedColor}
-                    selectedIds={{}}
-                    onPrimitiveClick={this.props.onPrimitiveClick}
-                />, this.primitivesGroup);
+                ReactDom.hydrate(this.getSvgPrimitiveRenderer({}), this.primitivesGroup);
 
                 this.forceUpdate(); // Triggerring update so that populate exact colors to svg based on our props.
             });
     }
+
+    private getSvgPrimitiveRenderer = (selectedIds: { [id: string]: boolean }) => {
+        const {selectedColor, onPrimitiveClick, onPrimitiveEnter, onPrimitiveLeave, onPrimitiveMove} = this.props;
+        return <SvgPrimitiveRenderer
+            primitives={this.primitives}
+            fillSelected={selectedColor}
+            selectedIds={selectedIds}
+            onPrimitiveClick={onPrimitiveClick}
+            onPrimitiveEnter={onPrimitiveEnter}
+            onPrimitiveLeave={onPrimitiveLeave}
+            onPrimitiveMove={onPrimitiveMove}
+        />
+    };
 
     /**
      * Populates the svg string to DOM with help of vanila js.

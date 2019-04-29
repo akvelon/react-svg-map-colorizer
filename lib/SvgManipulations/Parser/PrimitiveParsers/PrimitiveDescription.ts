@@ -1,6 +1,7 @@
 import * as React from "react";
 import { SvgPrimitiveDesription } from "../ParserInterfaces";
 import { SvgPrimitiveMetadata } from "../../SvgPrimitiveMetadata";
+import { SvgPrimitiveEventHandlers } from "../../SvgPrimitiveEventHandlers";
 
 /**
  * The prop name interpreted as color.
@@ -32,14 +33,22 @@ export class PrimitiveDescription implements SvgPrimitiveDesription
 		this.initialColor = initialColor;
 	}
 
-	createElement(color: string, onClickHandler: (id: string) => any): React.ReactSVGElement
+	createElement(color: string, eventHandlers: SvgPrimitiveEventHandlers): React.ReactSVGElement
 	{
+		const eventHandlersPropsPart = {};
+		const reactEventHandlers = this.transformToReactPropsNames(eventHandlers);
+		Object.keys(reactEventHandlers).forEach(k => {
+			if (reactEventHandlers[k]) {
+				eventHandlersPropsPart[k] = (e: React.MouseEvent<SVGElement>) => reactEventHandlers[k](this.id, e);
+			}
+		});
+
 		return React.createElement(this.element, {
 			...this.fixedAttrs,
 			id: this.id,
 			key: this.id,
-			onClick: onClickHandler ? () => onClickHandler(this.id) : undefined,
 			[this.colorProp]: color,
+			...eventHandlersPropsPart,
 		});
 	}
 
@@ -49,5 +58,28 @@ export class PrimitiveDescription implements SvgPrimitiveDesription
 			id: this.id,
 			color: domElement.props[this.colorProp]
 		};
+	}
+
+	private getReactFunctionName(arg: keyof SvgPrimitiveEventHandlers): string
+	{
+		switch (arg)
+		{
+			case "onPrimitiveClick": return "onClick";
+			case "onPrimitiveEnter": return "onMouseEnter";
+			case "onPrimitiveLeave": return "onMouseLeave";
+			case "onPrimitiveMove": return "onMouseMove";
+			default: const _exhaustiveCheck: never = arg; // this way we sure to exhaustive cover props.
+				return _exhaustiveCheck;
+		}
+	}
+	private transformToReactPropsNames(props: SvgPrimitiveEventHandlers)
+	{
+		const returnProps = {}
+		Object.keys(props).forEach((k: keyof SvgPrimitiveEventHandlers) =>
+		{
+			returnProps[this.getReactFunctionName(k)] = props[k];
+		});
+
+		return returnProps;
 	}
 }
