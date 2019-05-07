@@ -18,6 +18,10 @@ interface SvgRendererProps extends SvgPrimitiveEventHandlersPartial
      * Color map for ids, `*` matches any id(the exact id is more specific).
      */
     idColorMap: {[id: string]: string};
+    /**
+     * Called once when underlying svg populated to DOM.
+     */
+    onSvgMounted?: () => any
 }
 
 /**
@@ -61,6 +65,7 @@ class SvgRenderer extends React.Component<SvgRendererProps, {}>
                 // at this point we have SVG in DOM and attaching React to svg primitives part so that
                 // update it further with nice React syntax.
                 ReactDom.hydrate(this.getSvgPrimitiveRenderer({}), this.primitivesGroup);
+                this.props.onSvgMounted && this.props.onSvgMounted();
 
                 this.forceUpdate(); // Triggerring update so that populate exact colors to svg based on our props.
             });

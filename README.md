@@ -88,3 +88,4 @@ function unmountSvgComponent () {
 |`onPrimitiveEnter`| The optional callback which would be called with primitive id and mouse event when mouse enter into primitive.|
 |`onPrimitiveLeave`| The optional callback which would be called with primitive id and mouse event when mouse leaves primitive.|
 |`onPrimitiveMove`| The optional callback which would be called with primitive id and mouse event when mouse moves in primitive.|
+|`onSvgMounted`| The optional callback which called once underlying SVG mounted to the DOM. The component works outside of normal React lifecycle and just provides eventually consistent view representation so in case you need some time dependent work (e.g. use library which manipulated the DOM directly) this is the place to hook.|
