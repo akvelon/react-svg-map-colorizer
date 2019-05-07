@@ -2,6 +2,8 @@ import * as React from "react";
 import { SvgPrimitiveDesription } from "./Parser/ParserInterfaces";
 import { SvgPrimitiveEventHandlers } from "./SvgPrimitiveEventHandlers"
 
+const PRIMITIVE_WILDCARD = "*";
+
 /**
  * Describes props for svg primitives renderer.
  */
@@ -12,13 +14,9 @@ interface SvgPrimitiveRendererProps extends SvgPrimitiveEventHandlers
      */
     primitives: SvgPrimitiveDesription[];
     /**
-     * Color to fill the elements with IDs from selectedIds collection.
-     */
-    fillSelected: string;
-    /**
      * Map of selected ids. The one with 'true' value would be highlighted with fillSelected color.
      */
-    selectedIds: { [id: string]: boolean };
+    idColorMap: { [id: string]: string };
 }
 
 /**
@@ -44,9 +42,7 @@ function SvgPrimitiveRenderer(props: SvgPrimitiveRendererProps)
      */
     function getColorForPrimitive(id: string, ind: number)
     {
-        return props.selectedIds[id]
-            ? props.fillSelected
-            : props.primitives[ind].initialColor;
+        return props.idColorMap[id] || props.idColorMap[PRIMITIVE_WILDCARD] || props.primitives[ind].initialColor;
     }
 }
 

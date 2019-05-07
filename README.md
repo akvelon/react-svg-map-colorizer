@@ -34,8 +34,11 @@ import { Svg } from "react-svg-map-colorizer";
 function MyComponentNeedSvg {
 	const svgProps = {
 		svgUrl: "svgUrl",
-		selectedColor : "red",
-		selectedIds : ["elementId1", "elementId2"],
+		idColorMap: {
+			elementId1: "yellow",
+			elementId2: "red",
+			"*": "green"
+		},
 		onPrimitiveClick: (id) => console.log(id),
 	};
 
@@ -56,8 +59,11 @@ const svgContainer = document.getElementById("containerId");
 function RenderColoredSvg {
 	const svgProps = {
 		svgUrl: "svgUrl",
-		selectedColor : "red",
-		selectedIds : ["elementId1", "elementId2"],
+		idColorMap: {
+			elementId1: "yellow",
+			elementId2: "red",
+			"*": "green"
+		},
 		onPrimitiveClick: (id) => console.log(id),
 	};
 
@@ -77,8 +83,7 @@ function unmountSvgComponent () {
 | Property | Description |
 |----------| ----------- |
 |`svgUrl`  | The url to svg image. If you have file, you can create one with ` URL.createObjectUrl(file);`, please note to keep the url same for the same image, otherwise new component would created inside which would cause performance degradation for render.|
-|`selectedColor`| The fill color for elements with ids listed in `selectedIds`|
-|`selectedIds`| Array of element ids to be filled with `selectedColor`, elements which are not listed here would be filled with initial color.|
+|`idColorMap`| Dictionary where keys are primitive ids to highlight and values are color, elements which are not listed here would be filled with initial color. The initial color can be overriden by adding special `*` key.|
 |`onPrimitiveClick`| The optional callback you may pass to svg. It would be called with primitive id when primitive clicked and related mouse event.|
 |`onPrimitiveEnter`| The optional callback which would be called with primitive id and mouse event when mouse enter into primitive.|
 |`onPrimitiveLeave`| The optional callback which would be called with primitive id and mouse event when mouse leaves primitive.|

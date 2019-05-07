@@ -15,13 +15,9 @@ interface SvgRendererProps extends SvgPrimitiveEventHandlersPartial
      */
     svgUrl: string;
     /**
-     * List of svg primitive IDs we want to be highlighted with SelectedColor.
+     * Color map for ids, `*` matches any id(the exact id is more specific).
      */
-    selectedIds?: string[];
-    /**
-     * Color for elements listed in selectedIds.
-     */
-    selectedColor: string;
+    idColorMap: {[id: string]: string};
 }
 
 /**
@@ -51,13 +47,7 @@ class SvgRenderer extends React.Component<SvgRendererProps, {}>
 
     componentDidUpdate()
     {
-        // Searching in object is O(1) while in array is O(n) so we remap to increase the scripting performance of underlying SvgPrimitiveRenderer.
-        let selectedIds = {};
-        if (this.props.selectedIds)
-        {
-            this.props.selectedIds.forEach(id => selectedIds[id] = true);
-        }
-        ReactDom.render(this.getSvgPrimitiveRenderer(selectedIds), this.primitivesGroup);
+        ReactDom.render(this.getSvgPrimitiveRenderer(this.props.idColorMap), this.primitivesGroup);
     }
 
     componentDidMount()
@@ -76,12 +66,11 @@ class SvgRenderer extends React.Component<SvgRendererProps, {}>
             });
     }
 
-    private getSvgPrimitiveRenderer = (selectedIds: { [id: string]: boolean }) => {
-        const {selectedColor, onPrimitiveClick, onPrimitiveEnter, onPrimitiveLeave, onPrimitiveMove} = this.props;
+    private getSvgPrimitiveRenderer = (idColorMap: { [id: string]: string }) => {
+        const {onPrimitiveClick, onPrimitiveEnter, onPrimitiveLeave, onPrimitiveMove} = this.props;
         return <SvgPrimitiveRenderer
             primitives={this.primitives}
-            fillSelected={selectedColor}
-            selectedIds={selectedIds}
+            idColorMap={idColorMap}
             onPrimitiveClick={onPrimitiveClick}
             onPrimitiveEnter={onPrimitiveEnter}
             onPrimitiveLeave={onPrimitiveLeave}
