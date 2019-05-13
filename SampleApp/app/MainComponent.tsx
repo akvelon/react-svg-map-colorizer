@@ -7,14 +7,14 @@ export function MainComponent()
 {
 	const [svgUrl, setSvgUrl] = React.useState<string>(null);
 	const [overrideDefaultColor, setOverrideDefaultColor] = React.useState<boolean>(false);
-	const [selectedIds, updateSelection] = useSelectedIds(overrideDefaultColor);
-	const [tooltipData, setTooltip, clearTooltip] = useSelectedIdTooltip(selectedIds);
-	const [expandSvg, setExpandSvg] = React.useState(0);
+	const [selectedIds, updateSelection] = useSelectedIds(overrideDefaultColor); // shows both per element selection and allows override default color.
+	const [tooltipData, setTooltip, clearTooltip] = useSelectedIdTooltip(selectedIds); // utilizes primitive move and leave methods.
+	const [expandSvg, setExpandSvg] = React.useState(0); // used to implement fade in animation when svg mounted.
 	return (
 		<div>
 			{
 				svgUrl
-					? <div style={{transform: `scale(${expandSvg})`, transition: "transform 2s"}}>
+					? <div style={{ transform: `scale(${expandSvg})`, transition: "transform 2s" }}>
 						<Svg
 							svgUrl={svgUrl}
 							idColorMap={selectedIds}
@@ -26,10 +26,10 @@ export function MainComponent()
 					</div>
 					: <input type="file" onChange={e => setSvgUrl(URL.createObjectURL(e.target.files[0]))} />
 			}
-			{tooltipData && <Tooltip {...tooltipData}/>}
-			{svgUrl&&
-				<label style={{position: "absolute", top: 0}}>
-					<input type="checkbox" onChange={e => setOverrideDefaultColor(e.target.checked)}/>
+			{tooltipData && <Tooltip {...tooltipData} />}
+			{svgUrl &&
+				<label style={{ position: "absolute", top: 0 }}>
+					<input type="checkbox" onChange={e => setOverrideDefaultColor(e.target.checked)} />
 					Override default color
 				</label>
 			}
@@ -55,20 +55,21 @@ function useSelectedIdTooltip(selectedIds: StringDictionary): [TooltipProps, (id
 	}
 
 	const tooltipData = tooltipInfo
-	? {
-		x: tooltipInfo.x,
-		y: tooltipInfo.y,
-		dataToRender: [
-		{
-			key: "Id",
-			value: tooltipInfo.id,
-		},
-		{
-			key: "Selected",
-			value: (!!selectedIds[tooltipInfo.id]).toString()
+		? {
+			x: tooltipInfo.x,
+			y: tooltipInfo.y,
+			dataToRender: [
+				{
+					key: "Id",
+					value: tooltipInfo.id,
+				},
+				{
+					key: "Selected",
+					value: (!!selectedIds[tooltipInfo.id]).toString()
+				}
+			]
 		}
-	]}
-	: null;
+		: null;
 
 	return [tooltipData, setTooltip, clearTooltip];
 }
@@ -79,7 +80,8 @@ function useSelectedIds(overrideDefaultColor: boolean): [StringDictionary, (id: 
 	if (overrideDefaultColor)
 	{
 		selectedIds["*"] = "lightgray";
-	} else {
+	} else
+	{
 		delete selectedIds["*"];
 	}
 

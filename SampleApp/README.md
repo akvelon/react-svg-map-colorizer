@@ -12,4 +12,5 @@ The sample app demonstrates how we can create app which uses the component.
 # Run the app
 1. Once built, go to SampleApp root and double click on `index.html` so that open it in the browser.
 2. Then select `SvgSample.svg` at the SampleApp root. 
-3. You now can click on polygons so that toggle color.
+3. You now can click on elements so that toggle color.
+    1. Checkbox at the top allows override default color for elements which are not selected.
