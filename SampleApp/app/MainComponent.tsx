@@ -1,12 +1,12 @@
 import { Svg } from "../../dist/index"; // content of react-svg-map-colorizer npm package.
 import * as React from "react";
-import { Tooltip } from "./Tooltip";
+import { Tooltip, TooltipProps } from "./Tooltip";
 type StringDictionary = { [id: string]: string };
 export function MainComponent()
 {
 	const [svgUrl, setSvgUrl] = React.useState<string>(null);
 	const [selectedIds, updateSelection] = useSelectedIds();
-	const [tooltipInfo, setTooltipInfo] = React.useState(null);
+	const [tooltipData, setTooltip, clearTooltip] = useSelectedIdTooltip(selectedIds);
 	return (
 		<div>
 			{
@@ -15,26 +15,50 @@ export function MainComponent()
 						svgUrl={svgUrl}
 						idColorMap={selectedIds}
 						onPrimitiveClick={updateSelection}
-						onPrimitiveMove={
-							(id, event) =>
-							{
-								setTooltipInfo({
-									id,
-									x: event.clientX,
-									y: event.clientY
-								})
-							}}
-						onPrimitiveLeave={() => setTooltipInfo(null)}
+						onPrimitiveMove={setTooltip}
+						onPrimitiveLeave={clearTooltip}
 					/>
 					: <input type="file" onChange={e => setSvgUrl(URL.createObjectURL(e.target.files[0]))} />
 			}
-			{tooltipInfo && <Tooltip
-				x={tooltipInfo.x}
-				y={tooltipInfo.y}
-				dataToRender={[{ key: "Id", value: tooltipInfo.id }, { key: "Selected", value: (!!selectedIds[tooltipInfo.id]).toString() }]}
-			/>}
+			{tooltipData && <Tooltip {...tooltipData}/>}
 		</div>
 	);
+}
+
+function useSelectedIdTooltip(selectedIds: StringDictionary): [TooltipProps, (id: string, event: React.MouseEvent<SVGElement, MouseEvent>) => void, () => void]
+{
+	const [tooltipInfo, setTooltipInfo] = React.useState(null);
+	function setTooltip(id: string, event: React.MouseEvent<SVGElement, MouseEvent>)
+	{
+		setTooltipInfo({
+			id,
+			x: event.clientX,
+			y: event.clientY
+		});
+	}
+
+	function clearTooltip()
+	{
+		setTooltipInfo(null);
+	}
+
+	const tooltipData = tooltipInfo
+	? {
+		x: tooltipInfo.x,
+		y: tooltipInfo.y,
+		dataToRender: [
+		{
+			key: "Id",
+			value: tooltipInfo.id,
+		},
+		{
+			key: "Selected",
+			value: (!!selectedIds[tooltipInfo.id]).toString()
+		}
+	]}
+	: null;
+
+	return [tooltipData, setTooltip, clearTooltip];
 }
 
 function useSelectedIds(): [StringDictionary, (id: string) => void]
