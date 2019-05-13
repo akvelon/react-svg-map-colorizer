@@ -1,64 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="50.15744mm"
-   height="74.725883mm"
-   viewBox="0 0 50.15744 74.725883"
-   version="1.1"
    id="svg8"
-   inkscape:version="0.92.1 r15371"
-   sodipodi:docname="SampleSvg.svg">
+   version="1.1"
+   viewBox="0 0 210 297"
+   height="297mm"
+   width="210mm">
   <defs
      id="defs2" />
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="5.6"
-     inkscape:cx="63.439504"
-     inkscape:cy="238.09048"
-     inkscape:document-units="mm"
-     inkscape:current-layer="layer2"
-     showgrid="false"
-     showguides="true"
-     inkscape:guide-bbox="true"
-     inkscape:snap-global="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="1017"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
-     inkscape:window-maximized="1"
-     fit-margin-top="0"
-     fit-margin-left="0"
-     fit-margin-right="0"
-     fit-margin-bottom="0">
-    <sodipodi:guide
-       position="-140.47485,74.593596"
-       orientation="0,1"
-       id="guide3682"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="16.302098,0.21377502"
-       orientation="0,1"
-       id="guide3684"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="0.13229166,79.325556"
-       orientation="1,0"
-       id="guide3735"
-       inkscape:locked="false" />
-  </sodipodi:namedview>
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -71,83 +24,26 @@
       </cc:Work>
     </rdf:RDF>
   </metadata>
-   <rect fill="white" stroke="black" width="49.892857" height="74.461304" x="0" y="47.15773" transform="translate(0.13229166,-47.025438)"/>
-   <!-- The part we actually need, it possible to transform the image in such format-->
-  <g id="data" transform="translate(0.13229166,-47.025438)">
-      <polygon id="0" fill="white" stroke="black" points="1.4699821000000002,48.305698 23.920622,48.305698 23.920622,71.157249 1.4699821000000002,71.157249"/>
-      <polygon id="1" fill="white" stroke="black" points="26.058777,48.305698 48.643051,48.305698 48.643051,71.157249 26.058777,71.157249"/>
-      <polygon id="2" fill="white" stroke="black" points="1.4699821000000002,73.696312 23.920622,73.696312 23.920622,95.612411 1.4699821000000002,95.612411"/>
-      <polygon id="3" fill="white" stroke="black" points="26.058777,73.696312 48.643051,73.696312 48.643051,95.612411 26.058777,95.612411"/>
-      <polygon id="4" fill="white" stroke="black" points="1.4699821000000002,97.750557 23.920622,97.750557 23.920622,120.46848 1.4699821000000002,120.46848"/>
-      <polygon id="5" fill="white" stroke="black" points="26.058777,97.750557 48.643051,97.750557 48.643051,120.46848 26.058777,120.46848"/>
-   </g>
-   <!-- end -->
-   <g transform="translate(0.13229166,-47.025438)">
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="8.5526247"
-       y="62.871891"
-       id="text3753"><tspan
-         sodipodi:role="line"
-         id="tspan3751"
-         x="8.5526247"
-         y="62.871891"
-         style="stroke-width:0.26458332">1</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="33.809593"
-       y="63.005527"
-       id="text3757"><tspan
-         sodipodi:role="line"
-         id="tspan3755"
-         x="33.809593"
-         y="63.005527"
-         style="stroke-width:0.26458332">2</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="9.0871639"
-       y="87.995224"
-       id="text3761"><tspan
-         sodipodi:role="line"
-         id="tspan3759"
-         x="9.0871639"
-         y="87.995224"
-         style="stroke-width:0.26458332">3</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="33.542324"
-       y="88.12886"
-       id="text3765"><tspan
-         sodipodi:role="line"
-         id="tspan3763"
-         x="33.542324"
-         y="88.12886"
-         style="stroke-width:0.26458332">4</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="8.8198938"
-       y="111.78223"
-       id="text3769"><tspan
-         sodipodi:role="line"
-         id="tspan3767"
-         x="8.8198938"
-         y="111.78223"
-         style="stroke-width:0.26458332">5</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="33.675961"
-       y="110.71313"
-       id="text3773"><tspan
-         sodipodi:role="line"
-         id="tspan3771"
-         x="33.675961"
-         y="110.71313"
-         style="stroke-width:0.26458332">6</tspan></text>
+  <g
+     id="data">
+    <path
+       style="stroke-width:0.26458332"
+       d="M 90.714285,95.916668 57.992183,85.195107 30.609359,106.07257 30.694484,71.638862 2.3770743,52.047741 35.151786,41.488098 45.033489,8.5026508 65.204249,36.410145 99.628887,35.615139 79.320391,63.422562 Z"
+       fill="red"
+       id="star" />
+    <ellipse
+       style="stroke-width:0.26458332"
+       fill="cyan"
+       ry="37.419643"
+       rx="35.907738"
+       cy="60.00893"
+       cx="165.93155"
+       id="ellipse" />
+    <path
+       id="spiral"
+       d="m 79.510163,189.25993 c 1.211659,3.74602 -4.384927,4.51279 -6.6627,3.48701 -5.800307,-2.61211 -5.807974,-10.46554 -2.54548,-15.03018 5.469891,-7.65306 16.677135,-7.30413 23.397662,-1.60395 9.584315,8.12917 8.843735,22.95518 0.662421,31.76514 -10.728338,11.55271 -29.259232,10.40354 -40.132623,-0.2791 -13.539844,-13.30232 -11.974207,-35.5764 1.220638,-48.50011 15.863513,-15.53754 41.901167,-13.55132 56.867589,2.16217 17.54173,18.41736 15.13255,48.23078 -3.1037,65.23506 -20.966604,19.55019 -54.563666,16.71658 -73.602548,-4.04522 -21.561571,-23.51278 -18.302546,-60.89887 4.986756,-81.97003 26.056802,-23.57507 67.235782,-19.88996 90.337512,5.92829 18.80012,21.01082 22.30776,52.2298 9.67146,77.26359"
+       fill="none"
+       stroke="green"
+       style="stroke-width:5;" />
   </g>
 </svg>
