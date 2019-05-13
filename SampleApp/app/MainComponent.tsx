@@ -1,26 +1,33 @@
 import { Svg } from "../../dist/index"; // content of react-svg-map-colorizer npm package.
 import * as React from "react";
 import { Tooltip, TooltipProps } from "./Tooltip";
+
 type StringDictionary = { [id: string]: string };
 export function MainComponent()
 {
 	const [svgUrl, setSvgUrl] = React.useState<string>(null);
-	const [selectedIds, updateSelection] = useSelectedIds();
+	const [overrideDefaultColor, setOverrideDefaultColor] = React.useState<boolean>(false);
+	const [selectedIds, updateSelection] = useSelectedIds(overrideDefaultColor);
 	const [tooltipData, setTooltip, clearTooltip] = useSelectedIdTooltip(selectedIds);
+	const [expandSvg, setExpandSvg] = React.useState(0);
 	return (
 		<div>
 			{
 				svgUrl
-					? <Svg
-						svgUrl={svgUrl}
-						idColorMap={selectedIds}
-						onPrimitiveClick={updateSelection}
-						onPrimitiveMove={setTooltip}
-						onPrimitiveLeave={clearTooltip}
-					/>
+					? <div style={{transform: `scale(${expandSvg})`, transition: "transform 2s"}}>
+						<Svg
+							svgUrl={svgUrl}
+							idColorMap={selectedIds}
+							onPrimitiveClick={updateSelection}
+							onPrimitiveMove={setTooltip}
+							onPrimitiveLeave={clearTooltip}
+							onSvgMounted={() => setExpandSvg(1)}
+						/>
+					</div>
 					: <input type="file" onChange={e => setSvgUrl(URL.createObjectURL(e.target.files[0]))} />
 			}
 			{tooltipData && <Tooltip {...tooltipData}/>}
+			{svgUrl&&<label style={{position: "absolute", top: 0}}><input type="checkbox" onChange={e => setOverrideDefaultColor(e.target.checked)}/> Override default color</label>}
 		</div>
 	);
 }
@@ -61,9 +68,15 @@ function useSelectedIdTooltip(selectedIds: StringDictionary): [TooltipProps, (id
 	return [tooltipData, setTooltip, clearTooltip];
 }
 
-function useSelectedIds(): [StringDictionary, (id: string) => void]
+function useSelectedIds(overrideDefaultColor: boolean): [StringDictionary, (id: string) => void]
 {
-	const [selectedIds, setSelectedIds] = React.useState<StringDictionary>({ "*": "lightgray" });
+	const [selectedIds, setSelectedIds] = React.useState<StringDictionary>({});
+	if (overrideDefaultColor)
+	{
+		selectedIds["*"] = "lightgray";
+	} else {
+		delete selectedIds["*"];
+	}
 
 	function updateSelection(id: string)
 	{
