@@ -27,7 +27,12 @@ export function MainComponent()
 					: <input type="file" onChange={e => setSvgUrl(URL.createObjectURL(e.target.files[0]))} />
 			}
 			{tooltipData && <Tooltip {...tooltipData}/>}
-			{svgUrl&&<label style={{position: "absolute", top: 0}}><input type="checkbox" onChange={e => setOverrideDefaultColor(e.target.checked)}/> Override default color</label>}
+			{svgUrl&&
+				<label style={{position: "absolute", top: 0}}>
+					<input type="checkbox" onChange={e => setOverrideDefaultColor(e.target.checked)}/>
+					Override default color
+				</label>
+			}
 		</div>
 	);
 }
